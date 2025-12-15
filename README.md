@@ -1,50 +1,165 @@
-# Welcome to your Expo app 👋
+# 🌍 RetoCrehana - Countries Explorer
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Aplicación móvil desarrollada en **React Native** que muestra información de países del mundo y permite reproducir contenido de video en streaming HLS.
 
-## Get started
+## 📱 Características
 
-1. Install dependencies
+### Pantalla de Listado de Países
 
-   ```bash
-   npm install
-   ```
+- ✅ Barra de búsqueda para filtrar países por nombre
+- ✅ Filtro por continente mediante selector/dropdown
+- ✅ Filtro por moneda (currency)
+- ✅ Cada ítem muestra: nombre del país, código, continente y emoji
 
-2. Start the app
+### Pantalla de Detalle de País
 
-   ```bash
-   npx expo start
-   ```
+- ✅ Código del país
+- ✅ Nombre (nativo e internacional)
+- ✅ Capital
+- ✅ Continente
+- ✅ Moneda
+- ✅ Idiomas
+- ✅ Reproductor de video HLS con controles nativos
 
-In the output, you'll find options to open the app in a
+### Características Técnicas
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- ✅ React Native con TypeScript (modo estricto)
+- ✅ GraphQL con Apollo Client para consumo de API
+- ✅ Navegación con Expo Router
+- ✅ UI Components con NativeWind (TailwindCSS)
+- ✅ FlashList para listas optimizadas
+- ✅ Reproductor HLS con expo-video
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## 🛠️ Stack Tecnológico
 
-## Get a fresh project
+| Tecnología    | Versión | Propósito               |
+| ------------- | ------- | ----------------------- |
+| Expo SDK      | 54      | Framework de desarrollo |
+| TypeScript    | 5.9     | Tipado estático         |
+| Apollo Client | 3.x     | Cliente GraphQL         |
+| NativeWind    | 4.x     | Estilos (TailwindCSS)   |
+| Expo Router   | 6.x     | Navegación file-based   |
+| FlashList     | latest  | Listas optimizadas      |
+| expo-video    | latest  | Reproducción HLS        |
 
-When you're ready, run:
+## 📦 Instalación
+
+### Prerrequisitos
+
+- Node.js >= 18.x
+- npm o yarn
+- Expo CLI (`npm install -g expo-cli`)
+- iOS Simulator (Mac) o Android Emulator
+
+### Pasos de instalación
+
+1. **Clonar el repositorio**
 
 ```bash
-npm run reset-project
+git clone https://github.com/Emanullh/RetoCrehana.git
+cd RetoCrehana
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+2. **Instalar dependencias**
 
-## Learn more
+```bash
+npm install
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+3. **Iniciar el servidor de desarrollo**
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+npm start
+```
 
-## Join the community
+4. **Ejecutar en dispositivo/simulador**
 
-Join our community of developers creating universal apps.
+```bash
+# iOS
+npm run ios
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+# Android
+npm run android
+```
+
+## 🚀 Scripts disponibles
+
+```bash
+npm start         # Inicia Expo en modo desarrollo
+npm run ios       # Ejecuta en simulador iOS
+npm run android   # Ejecuta en emulador Android
+npm run web       # Ejecuta en navegador web
+npm run lint      # Ejecuta ESLint
+```
+
+## 📁 Estructura del Proyecto
+
+```
+RetoCrehana/
+├── app/                          # Pantallas (Expo Router)
+│   ├── _layout.tsx              # Layout principal
+│   ├── index.tsx                # Pantalla de listado
+│   └── country/
+│       └── [code].tsx           # Pantalla de detalle
+├── components/
+│   └── ui/                      # Componentes UI reutilizables
+│       ├── Card.tsx
+│       ├── SearchInput.tsx
+│       ├── FilterDropdown.tsx
+│       ├── LoadingSpinner.tsx
+│       ├── ErrorView.tsx
+│       └── EmptyState.tsx
+├── features/                    # Módulos por característica
+│   ├── countries/
+│   │   ├── components/          # Componentes de países
+│   │   │   ├── CountryCard.tsx
+│   │   │   ├── CountryList.tsx
+│   │   │   └── FilterBar.tsx
+│   │   └── hooks/               # Lógica de países
+│   │       ├── useCountries.ts
+│   │       └── useCountryDetails.ts
+│   └── video-player/
+│       └── components/
+│           └── HLSPlayer.tsx    # Reproductor HLS
+├── lib/                         # Configuración y utilidades
+│   ├── apollo.ts                # Cliente Apollo
+│   └── graphql/
+│       ├── queries.ts           # Queries GraphQL
+│       └── types.ts             # Tipos TypeScript
+└── hooks/                       # Hooks compartidos
+```
+
+## 🔗 APIs Utilizadas
+
+### GraphQL - Países
+
+- **Endpoint**: https://countries.trevorblades.com/graphql
+- **Documentación**: https://github.com/trevorblades/countries
+
+### Video HLS
+
+- **Fuente de demostración**: Mux Test Streams
+- **URL**: https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8
+
+## 🎨 Diseño y UX
+
+- **Tema claro/oscuro** adaptativo según preferencias del sistema
+- **Filtrado en tiempo real** con debounce de 300ms
+- **Estados de carga** con spinners informativos
+- **Manejo de errores** con opciones de reintento
+- **Accesibilidad** con labels y roles apropiados
+- **Animaciones sutiles** en interacciones táctiles
+
+## 📋 Arquitectura
+
+La aplicación sigue una **arquitectura basada en características** (Feature-Based Architecture):
+
+1. **Capa de Presentación** (`app/`): Pantallas con Expo Router
+2. **Capa de Features** (`features/`): Lógica y componentes por dominio
+3. **Capa Compartida** (`components/`, `lib/`): Recursos reutilizables
+
+### Patrones utilizados
+
+- **Custom Hooks**: Separación de lógica y presentación
+- **Apollo Client**: Gestión de estado con caché normalizada
+- **Container/Presentational**: Componentes inteligentes vs. de presentación
